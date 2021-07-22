@@ -18,6 +18,7 @@ public class Employee {
     private String lastName;
     @Temporal(TemporalType.DATE)
     private Date dob;
+    @Column(unique = true,updatable = false)
     private String empId;
     private Long salary;
 

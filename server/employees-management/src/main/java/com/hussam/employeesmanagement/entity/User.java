@@ -24,7 +24,7 @@ public class User {
     @Pattern(regexp = "^[A-Za-z]\\w{5,29}$", message = "username is not valid")
     private String username;
 
-    @Column(unique = true)
+    @Column(unique = true, updatable = false)
     private String email;
     @JsonIgnore
     @NotBlank(message = "Please enter a password")
