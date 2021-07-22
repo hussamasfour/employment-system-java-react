@@ -1,5 +1,5 @@
 package com.hussam.employeesmanagement.entity;
 
-public enum RoleType {
-    ROLE_ADMIN,
+public enum Gender {
+    MALE, FEMALE
 }

@@ -11,8 +11,8 @@ import java.util.Date;
 public class JwtUtils {
     @Value("${hussam.app.secretKey}")
     private String secretKey;
-    @Value("{hussam.app.jwtExpirationMs}")
-    private String ExpirationMs;
+    @Value("${hussam.app.jwtExpirationMs}")
+    private int ExpirationMs;
 
     public String generateJwtToken(UserDetailsImp userPrincipal) {
         return generateTokenFromUsername(userPrincipal.getUsername());
@@ -20,8 +20,10 @@ public class JwtUtils {
 
     public String generateTokenFromUsername(String username) {
 
-        return Jwts.builder().setSubject(username).setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + ExpirationMs)).signWith(SignatureAlgorithm.HS512, secretKey).compact();
+        return Jwts.builder().setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + ExpirationMs ))
+                .signWith(SignatureAlgorithm.HS512, secretKey).compact();
 
     }
 
