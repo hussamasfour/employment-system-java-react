@@ -6,6 +6,7 @@ import com.hussam.employeesmanagement.dto.response.JwtResponse;
 import com.hussam.employeesmanagement.entity.Role;
 import com.hussam.employeesmanagement.entity.RoleType;
 import com.hussam.employeesmanagement.entity.User;
+import com.hussam.employeesmanagement.exception.InvalidArgumentException;
 import com.hussam.employeesmanagement.repository.RoleRepository;
 import com.hussam.employeesmanagement.repository.UserRepository;
 import com.hussam.employeesmanagement.security.userService.UserDetailsImp;
@@ -14,9 +15,11 @@ import com.hussam.employeesmanagement.security.util.JwtUtils;
 import com.hussam.employeesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -77,30 +80,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JwtResponse signIn(LoginRequest loginRequest) {
-        Authentication authentication=  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
+            UserDetailsImp userDetails = (UserDetailsImp) authentication.getPrincipal();
 
-        String jwt = jwtUtils.generateJwtToken(userDetails);
+            String jwt = jwtUtils.generateJwtToken(userDetails);
 
 //        RefreshToken refreshToken = refreshTokenUtil.createRefreshToken(userDetails.getId());
 
-        List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+            List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
+                    .collect(Collectors.toList());
 
 
-        JwtResponse jwtResponse = new JwtResponse();
+            JwtResponse jwtResponse = new JwtResponse();
 
-        jwtResponse.setEmail(userDetails.getEmail());
-        jwtResponse.setUsername(userDetails.getUsername());
-        jwtResponse.setAccessToken(jwt);
-        jwtResponse.setId(userDetails.getId());
+            jwtResponse.setEmail(userDetails.getEmail());
+            jwtResponse.setUsername(userDetails.getUsername());
+            jwtResponse.setAccessToken(jwt);
+            jwtResponse.setId(userDetails.getId());
 //        jwtResponse.setRefreshToken(refreshToken.getToken());
-        jwtResponse.setRoles(roles);
+            jwtResponse.setRoles(roles);
 
-        return jwtResponse;
+            return jwtResponse;
+        }catch (InvalidArgumentException e){
+            throw new InvalidArgumentException("Username/password is not correct!!");
+        }
+        catch (UsernameNotFoundException e){
+            throw new UsernameNotFoundException("User name not found");
+        }
     }
 
     @Override

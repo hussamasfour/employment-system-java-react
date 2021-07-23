@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;

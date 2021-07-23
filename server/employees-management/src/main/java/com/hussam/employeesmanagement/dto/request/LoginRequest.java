@@ -11,8 +11,8 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 public class LoginRequest {
-    @NotBlank
+    @NotBlank(message = "You must enter a username")
     private String username;
-    @NotBlank
+    @NotBlank(message = "you must enter a password")
     private String password;
 }

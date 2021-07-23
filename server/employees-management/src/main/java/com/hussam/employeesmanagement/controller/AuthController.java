@@ -7,15 +7,15 @@ import com.hussam.employeesmanagement.dto.response.SignUpResponse;
 import com.hussam.employeesmanagement.entity.User;
 import com.hussam.employeesmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class AuthController {
     private final UserService userService;
 
