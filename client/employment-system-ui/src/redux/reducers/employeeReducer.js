@@ -8,7 +8,7 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_EMPLOYEES:
       return {
         ...state,
-        employees: action.payload,
+        employees: Object.values(action.payload),
       };
 
     default:

@@ -2,17 +2,25 @@ import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { fetchEmployees } from "../../redux/actions";
+import EmployeeItem from "../employeeItem/EmployeeItem";
+
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.fetchEmployees();
   }
   render() {
-    const { isLoggedIn } = this.props;
-    console.log(this.props.employeesList);
+    const { isLoggedIn, employeesList } = this.props;
+    console.log();
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
     }
-    return <div>Dashboard</div>;
+    return (
+      <div>
+        {employeesList.map((employee) => (
+          <EmployeeItem employee={employee} key={employee.id} />
+        ))}
+      </div>
+    );
   }
 }
 
