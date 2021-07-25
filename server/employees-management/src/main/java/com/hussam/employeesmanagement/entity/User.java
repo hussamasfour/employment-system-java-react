@@ -40,7 +40,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<Role> listRole;
 
-    @OneToMany(cascade = CascadeType.ALL )
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Employee> employeeList;
 }

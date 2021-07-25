@@ -1,5 +1,6 @@
 package com.hussam.employeesmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,11 +18,13 @@ public class Employee {
     private String firstName;
     private String lastName;
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dob;
     @Column(unique = true,updatable = false)
     private String empId;
     private Long salary;
-
+    @Column(unique = true)
+    private String email;
     @Enumerated(EnumType.STRING)
     private Gender gender;
 

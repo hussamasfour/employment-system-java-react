@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { fetchEmployees } from "../../redux/actions";
-import EmployeeItem from "../employeeItem/EmployeeItem";
+import EmployeeItem from "../employee/employeeItem/EmployeeItem";
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -10,15 +11,34 @@ class Dashboard extends React.Component {
   }
   render() {
     const { isLoggedIn, employeesList } = this.props;
-    console.log();
+
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
     }
     return (
       <div>
-        {employeesList.map((employee) => (
-          <EmployeeItem employee={employee} key={employee.id} />
-        ))}
+        <table className="table ">
+          <thead>
+            <tr>
+              <th scope="col">Emp ID</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">DOB</th>
+
+              <th scope="col">Salary</th>
+              <th scope="col">Salary</th>
+
+              <th scope="col">Salary</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employeesList.map((employee) => (
+              <EmployeeItem employee={employee} key={employee.id} />
+            ))}
+          </tbody>
+        </table>
+
+        <Link to="/employee/new">Add Employee</Link>
       </div>
     );
   }
