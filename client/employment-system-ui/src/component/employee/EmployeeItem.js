@@ -11,7 +11,8 @@ const EmployeeItem = ({ employee, history }) => {
       <td> {employee.salary}</td>
       <td> {employee.email}</td>
       <td>
-        <Link to={`employee/${employee.id}/edit`}>Edit</Link>
+        <Link to={`employee/${employee.id}/edit`}>Edit</Link>/
+        <Link to={`employee/${employee.id}/delete`}>Delete</Link>
       </td>
     </tr>
   );

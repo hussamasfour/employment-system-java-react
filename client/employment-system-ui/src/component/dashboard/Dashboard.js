@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Employees List</h1>
-        <table className="table ">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Emp ID</th>
@@ -29,7 +29,7 @@ class Dashboard extends React.Component {
               <th scope="col">Salary</th>
               <th scope="col">Email</th>
 
-              <th scope="col">Edit/Del</th>
+              <th scope="col">Edit/Delete</th>
             </tr>
           </thead>
           <tbody>

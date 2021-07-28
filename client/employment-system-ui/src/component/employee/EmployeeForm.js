@@ -72,7 +72,7 @@ const EmployeeForm = ({
 
         <Field
           className="form-select "
-          disabled
+          disabled={editMode ? true : false}
           name="gender"
           label="Gender"
           hidden={editMode ? true : false}
@@ -80,8 +80,7 @@ const EmployeeForm = ({
           component={SelectFields}
           id="gender"
         >
-          <MenuItem defaultValue primaryText="Select" />
-          <MenuItem value="male" primaryText="male" />
+          <MenuItem value="male" primaryText="Male" />
           <MenuItem value="Female" primaryText="Female" />
         </Field>
 

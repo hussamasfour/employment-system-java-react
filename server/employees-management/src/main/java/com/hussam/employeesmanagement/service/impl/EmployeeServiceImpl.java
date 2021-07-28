@@ -51,6 +51,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         newEmployee.setLastName(employee.getLastName());
         newEmployee.setSalary(employee.getSalary());
         newEmployee.setDob(employee.getDob());
+        newEmployee.setEmail(employee.getEmail());
         if("male".equalsIgnoreCase(employee.getGender())){
             newEmployee.setGender(Gender.MALE);
         }else{
@@ -77,14 +78,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void removeEmployeeById(Long id, UserDetailsImp userDetails) {
         User user = userService.getUserByUsername(userDetails.getUsername());
-//        Optional<Employee> employee = employeeRepository.findById(id);
-//        if(employee.isPresent()){
-//            if(   !employee.get().getUser().equals(user)){
-//                throw new IllegalArgumentException("You dont have access to seslected employee");
-//            }
+        Optional<Employee> employee = employeeRepository.findByIdAndUser(id, user);
+        if(!employee.isPresent()){
+            throw new NotFoundException("Error there is no employee with selected id");
+            }
         employeeRepository.deleteById(id);
-
-
     }
 
     @Override
