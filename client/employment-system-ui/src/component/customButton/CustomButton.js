@@ -1,11 +1,7 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 const CustomButton = ({ children, ...otherProps }) => {
-  return (
-    <div>
-      <Button {...otherProps}>{children}</Button>
-    </div>
-  );
+  return <Button {...otherProps}>{children}</Button>;
 };
 
 export default CustomButton;

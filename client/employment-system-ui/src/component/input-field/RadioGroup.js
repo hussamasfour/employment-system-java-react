@@ -3,10 +3,9 @@ import { RadioButtonGroup } from "material-ui/RadioButton";
 
 const RadioGroup = ({
   input,
-  cvalue,
+
   children,
   meta: { touched, error },
-  onChange,
 }) => {
   return (
     <RadioButtonGroup
