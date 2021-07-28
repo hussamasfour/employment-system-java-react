@@ -12,7 +12,7 @@ const EmployeeItem = ({ employee, history }) => {
       <td> {employee.email}</td>
       <td>
         <Link to={`employee/${employee.id}/edit`}>Edit</Link>/
-        <Link to={`employee/${employee.id}/delete`}>Delete</Link>
+        <button className="btn btn-sm btn-danger">Delete</button>
       </td>
     </tr>
   );

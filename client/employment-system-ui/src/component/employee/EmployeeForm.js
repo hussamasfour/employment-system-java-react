@@ -1,4 +1,5 @@
 import { MenuItem } from "material-ui";
+import { RadioButton } from "material-ui/RadioButton";
 import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
@@ -7,7 +8,8 @@ import { addEmployee, updateEmployee } from "../../redux/actions";
 import validateEmail from "../../utils/validateEmail";
 import CustomButton from "../customButton/CustomButton";
 import InputField from "../input-field/InputField";
-import SelectFields from "../input-field/SelectField";
+import RadioGroup from "../input-field/RadioGroup";
+import SelectFields from "../input-field/RadioGroup";
 
 const EmployeeForm = ({
   handleSubmit,
@@ -19,7 +21,6 @@ const EmployeeForm = ({
 }) => {
   const title = editMode ? "Edit post" : "Add new Employee";
   const buttonText = editMode ? "Edit" : "Add";
-  const emp = editMode ? employee : null;
   const onSubmit = (values) => {
     console.log(values);
     if (editMode) {
@@ -35,9 +36,10 @@ const EmployeeForm = ({
         <Field
           name="id"
           type="text"
-          cvalue={emp ? emp.id : ""}
+          cvalue={employee ? employee.id : ""}
           label="id"
           component={InputField}
+          hidden={editMode ? false : true}
         />
         <Field
           name="firstName"
@@ -61,6 +63,10 @@ const EmployeeForm = ({
           label="Salary"
           component={InputField}
         />
+        <Field name="gender" component={RadioGroup}>
+          <RadioButton value="male" label="male" />
+          <RadioButton value="female" label="female" />
+        </Field>
 
         <Field
           name="email"
@@ -69,20 +75,6 @@ const EmployeeForm = ({
           label="Email"
           component={InputField}
         />
-
-        <Field
-          className="form-select "
-          disabled={editMode ? true : false}
-          name="gender"
-          label="Gender"
-          hidden={editMode ? true : false}
-          cvalue={employee ? employee.gender : ""}
-          component={SelectFields}
-          id="gender"
-        >
-          <MenuItem value="male" primaryText="Male" />
-          <MenuItem value="Female" primaryText="Female" />
-        </Field>
 
         <CustomButton type="submit">{buttonText}</CustomButton>
       </form>
