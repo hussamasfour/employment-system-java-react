@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router";
+import { Redirect, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { fetchEmployees } from "../../redux/actions";
-import EmployeeItem from "../employee/employeeItem/EmployeeItem";
+import EmployeeItem from "../employee/EmployeeItem";
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -17,6 +17,7 @@ class Dashboard extends React.Component {
     }
     return (
       <div>
+        <h1>Employees List</h1>
         <table className="table ">
           <thead>
             <tr>
@@ -26,14 +27,14 @@ class Dashboard extends React.Component {
               <th scope="col">DOB</th>
 
               <th scope="col">Salary</th>
-              <th scope="col">Salary</th>
+              <th scope="col">Email</th>
 
-              <th scope="col">Salary</th>
+              <th scope="col">Edit/Del</th>
             </tr>
           </thead>
           <tbody>
             {employeesList.map((employee) => (
-              <EmployeeItem employee={employee} key={employee.id} />
+              <EmployeeItem employee={employee} key={employee.id} history />
             ))}
           </tbody>
         </table>
@@ -50,4 +51,6 @@ const mapStateToProps = ({ auth, employee }) => {
     employeesList: employee.employees,
   };
 };
-export default connect(mapStateToProps, { fetchEmployees })(Dashboard);
+export default connect(mapStateToProps, { fetchEmployees })(
+  withRouter(Dashboard)
+);

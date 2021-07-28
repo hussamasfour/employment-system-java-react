@@ -18,4 +18,7 @@ public interface EmployeeService {
     List<Employee> getAllEmployeesOfCurrentUser(UserDetailsImp userDetails);
 
     void removeEmployeeById(Long id, UserDetailsImp userDetails);
+
+    Employee updateEmployee(Long id, Employee employee, UserDetailsImp userDetails);
+
 }

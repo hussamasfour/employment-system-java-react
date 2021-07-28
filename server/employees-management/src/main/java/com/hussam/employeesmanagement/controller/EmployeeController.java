@@ -31,6 +31,13 @@ public class EmployeeController {
         employeeService.addEmployee(employee, userDetails);
         return new ResponseEntity("added new Employee", HttpStatus.CREATED);
     }
+    @PutMapping("/employee/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Employee> updateEmployee( @PathVariable("id") Long id , @RequestBody Employee employee,  @CurrentUser UserDetailsImp userDetails){
+
+
+        return new ResponseEntity(employeeService.updateEmployee(id, employee , userDetails), HttpStatus.CREATED);
+    }
 
     @GetMapping("/employee/{id}")
     @PreAuthorize("hasRole('ADMIN')")

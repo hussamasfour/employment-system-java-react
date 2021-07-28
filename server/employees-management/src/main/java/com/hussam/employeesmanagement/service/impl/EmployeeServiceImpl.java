@@ -82,8 +82,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 //            if(   !employee.get().getUser().equals(user)){
 //                throw new IllegalArgumentException("You dont have access to seslected employee");
 //            }
-            employeeRepository.deleteById(id);
+        employeeRepository.deleteById(id);
 
 
+    }
+
+    @Override
+    public Employee updateEmployee(Long id, Employee employee, UserDetailsImp userDetails) {
+        User user = userService.getUserByUsername(userDetails.getUsername());
+        Optional<Employee> selectedEmployee = employeeRepository.findByIdAndUser(id, user);
+        if(selectedEmployee.isPresent()){
+            selectedEmployee.get().setFirstName(employee.getFirstName());
+            selectedEmployee.get().setLastName(employee.getLastName());
+            selectedEmployee.get().setEmail(employee.getEmail());
+            selectedEmployee.get().setSalary(employee.getSalary());
+        }
+
+        return employeeRepository.save(selectedEmployee.get());
     }
 }

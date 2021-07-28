@@ -6,10 +6,12 @@ const InputField = ({
   meta: { touched, error, submitFailed },
   ...customProps
 }) => {
+  if (input.value === "" && customProps.cvalue) {
+    input.onChange(String(customProps.cvalue));
+  }
   return (
     <TextField
       label={label}
-      floatingLabelText={label}
       helperText={touched && error}
       {...input}
       {...customProps}

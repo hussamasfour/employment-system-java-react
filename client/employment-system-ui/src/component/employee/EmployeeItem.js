@@ -1,6 +1,6 @@
 import React from "react";
-
-const EmployeeItem = ({ employee }) => {
+import { Link } from "react-router-dom";
+const EmployeeItem = ({ employee, history }) => {
   return (
     <tr>
       <th scope="row">{employee.empId} </th>
@@ -9,8 +9,10 @@ const EmployeeItem = ({ employee }) => {
       <td> {employee.dob}</td>
 
       <td> {employee.salary}</td>
-      <td> fetchEmployees</td>
-      <td> fetchEmployees</td>
+      <td> {employee.email}</td>
+      <td>
+        <Link to={`employee/${employee.id}/edit`}>Edit</Link>
+      </td>
     </tr>
   );
 };

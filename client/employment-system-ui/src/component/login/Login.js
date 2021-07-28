@@ -80,7 +80,7 @@ const Login = (props) => {
             id="password"
             autoComplete="password"
             variant="outlined"
-            margin="noraml"
+            margin="normal"
             fullWidth
             autoFocus
             component={InputField}
