@@ -46,6 +46,7 @@ const EmployeeForm = ({
             <Field
               name="id"
               type="text"
+              disabled={editMode ? true : false}
               cvalue={employee ? employee.id : ""}
               label="id"
               variant="outlined"

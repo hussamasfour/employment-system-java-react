@@ -1,16 +1,20 @@
 import React from "react";
+import { TableContainer, TableHead } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
+import { Table, TableBody, TableHeader, TableRow } from "material-ui";
+import { TableCell } from "@material-ui/core";
 import { connect } from "react-redux";
 import { Redirect, withRouter } from "react-router";
-import { Link } from "react-router-dom";
 import { fetchEmployees } from "../../redux/actions";
 import EmployeeItem from "../employee/EmployeeItem";
+import CustomButton from "../customButton/CustomButton";
 
 class Dashboard extends React.Component {
   componentDidMount() {
     this.props.fetchEmployees();
   }
   render() {
-    const { isLoggedIn, employeesList } = this.props;
+    const { isLoggedIn, employeesList, history } = this.props;
 
     if (!isLoggedIn) {
       return <Redirect to="/login" />;
@@ -18,28 +22,37 @@ class Dashboard extends React.Component {
     return (
       <div>
         <h1>Employees List</h1>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Emp ID</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">DOB</th>
+        <TableContainer component={Paper}>
+          <Table aria-label="caption table">
+            <TableHeader>
+              <TableRow>
+                <TableCell>Emp ID</TableCell>
+                <TableCell align="right">First Name</TableCell>
+                <TableCell align="right">Last Name</TableCell>
+                <TableCell align="right">DOB</TableCell>
+                <TableCell align="right">Salary</TableCell>
+                <TableCell align="right">Email</TableCell>
+                <TableCell align="right">Edit/Delete</TableCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {employeesList.map((employee) => (
+                <EmployeeItem employee={employee} key={employee.id} />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
-              <th scope="col">Salary</th>
-              <th scope="col">Email</th>
-
-              <th scope="col">Edit/Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employeesList.map((employee) => (
-              <EmployeeItem employee={employee} key={employee.id} history />
-            ))}
-          </tbody>
-        </table>
-
-        <Link to="/employee/new">Add Employee</Link>
+        <CustomButton
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={() => {
+            history.push("/employee/new");
+          }}
+        >
+          Add Employee
+        </CustomButton>
       </div>
     );
   }

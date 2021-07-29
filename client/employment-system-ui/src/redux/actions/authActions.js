@@ -30,9 +30,10 @@ export const fetchUser = (formValues, history) => async (dispatch) => {
       localStorage.setItem("token", response.data.accessToken);
       tokenHandler(response.data.accessToken);
       dispatch(loginSuccess(response.data));
+      history.push("/dashboard");
     }
   } catch (error) {
     // dispatch(loginFailure(error));
+    console.log(error.response.data);
   }
-  history.push("/dashboard");
 };
