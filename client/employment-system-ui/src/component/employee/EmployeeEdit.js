@@ -1,21 +1,17 @@
-import { ThumbUpSharp } from "@material-ui/icons";
-import React from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchEmployeeById } from "../../redux/actions";
 import EmployeeForm from "./EmployeeForm";
 
-class EmployeeEdit extends React.Component {
-  componentDidMount() {
-    const { id } = this.props.match.params;
-    this.props.fetchEmployeeById(id);
-  }
-  render() {
-    return <EmployeeForm editMode employee={this.props.emp} />;
-  }
-}
-const mapStateToProps = ({ employee }) => {
-  return {
-    emp: employee.emp,
-  };
+const EmployeeEdit = ({ match }) => {
+  const selectedEmployee = useSelector((state) => state.employee.emp);
+  const dispatch = useDispatch();
+  const { id } = match.params;
+  useEffect(() => {
+    dispatch(fetchEmployeeById(id));
+  }, []);
+
+  return <EmployeeForm editMode employee={selectedEmployee} />;
 };
-export default connect(mapStateToProps, { fetchEmployeeById })(EmployeeEdit);
+
+export default EmployeeEdit;
