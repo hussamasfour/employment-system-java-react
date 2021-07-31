@@ -85,7 +85,9 @@ const EmployeeForm = ({
         </div>
         <Field name="email" type="text" label="Email" component={InputField} />
         <div>
-          <CustomButton type="submit">{buttonText}</CustomButton>
+          <CustomButton type="submit" className="btn btn-primary">
+            {buttonText}
+          </CustomButton>
           <CustomButton onClick={() => history.push("/dashboard")}>
             Cancel
           </CustomButton>

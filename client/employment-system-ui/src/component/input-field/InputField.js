@@ -8,12 +8,14 @@ const InputField = ({
   ...customProps
 }) => {
   return (
-    <div>
-      <label>{label}</label>
-      <div>
-        <input {...input} placeholder={label} type={type} {...customProps} />
-        {touched && error && submitFailed && <span>{error}</span>}
-      </div>
+    <div className="form-outline form-white mb-4">
+      <label className="form-label" htmlFor="typeEmailX">
+        {label}
+      </label>
+      <input {...input} type={type} {...customProps} id="typeEmailX" />
+      {touched && error && submitFailed && (
+        <span className="bg-danger">{error}</span>
+      )}
     </div>
   );
 };

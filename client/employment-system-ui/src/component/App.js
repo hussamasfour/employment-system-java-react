@@ -7,7 +7,7 @@ import EmployeeNew from "./employee/EmployeeNew";
 import Login from "./login/Login";
 const App = () => {
   return (
-    <div className="container">
+    <div className="container py-5 h-100">
       <Switch>
         <Route path="/login" exact component={Login} />
         <Route path="/dashboard" exact component={Dashboard} />

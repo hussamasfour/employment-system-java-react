@@ -15,7 +15,7 @@ const EmployeeItem = ({ employee }) => {
       <td> {employee.lastName}</td>
       <td> {employee.dob}</td>
 
-      <td> {employee.salary}</td>
+      <td> $ {employee.salary}</td>
       <td> {employee.email}</td>
       <td> {employee.gender}</td>
 

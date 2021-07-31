@@ -18,7 +18,7 @@ export const loginSuccess = (user) => {
 export const loginFailure = (error) => {
   return {
     type: SIGN_IN_FAILURE,
-    payload: error.response.data,
+    payload: error.response.data.message,
   };
 };
 
@@ -33,7 +33,7 @@ export const fetchUser = (formValues, history) => async (dispatch) => {
       history.push("/dashboard");
     }
   } catch (error) {
-    // dispatch(loginFailure(error));
-    console.log(error.response.data);
+    dispatch(loginFailure(error));
+    console.log(error.response.data.message);
   }
 };
