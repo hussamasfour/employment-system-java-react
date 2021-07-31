@@ -1,37 +1,43 @@
-import { TableCell } from "@material-ui/core";
-import { TableRow } from "material-ui";
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import CustomButton from "../customButton/CustomButton";
-const EmployeeItem = ({ employee, history }) => {
-  return (
-    <TableRow>
-      <TableCell component="th" scope="row">
-        {employee.empId}
-      </TableCell>
-      <TableCell align="right"> {employee.firstName}</TableCell>
-      <TableCell align="right"> {employee.lastName}</TableCell>
-      <TableCell align="right"> {employee.dob}</TableCell>
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { deleteEmployeeById } from "../../redux/actions";
 
-      <TableCell align="right"> {employee.salary}</TableCell>
-      <TableCell align="right"> {employee.email}</TableCell>
-      <TableCell align="right">
+import CustomButton from "../customButton/CustomButton";
+
+const EmployeeItem = ({ employee }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  return (
+    <tr>
+      <th scope="row">{employee.empId}</th>
+      <td> {employee.firstName}</td>
+      <td> {employee.lastName}</td>
+      <td> {employee.dob}</td>
+
+      <td> {employee.salary}</td>
+      <td> {employee.email}</td>
+      <td> {employee.gender}</td>
+
+      <td>
         <CustomButton
-          variant="contained"
-          size="small"
           onClick={() => {
-            history.push(`employee/${employee.id}/edit`);
+            history.push(`/employee/${employee.id}/edit`);
           }}
         >
           Edit
         </CustomButton>
         /
-        <CustomButton variant="contained" color="secondary" size="small">
+        <CustomButton
+          onClick={() => {
+            dispatch(deleteEmployeeById(employee.id));
+          }}
+        >
           Delete
         </CustomButton>
-      </TableCell>
-    </TableRow>
+      </td>
+    </tr>
   );
 };
 
-export default withRouter(EmployeeItem);
+export default EmployeeItem;

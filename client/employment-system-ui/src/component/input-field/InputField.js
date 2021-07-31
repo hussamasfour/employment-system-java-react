@@ -1,21 +1,20 @@
-import { TextField } from "@material-ui/core";
 import React from "react";
 const InputField = ({
   input,
   label,
+  type,
+  cvalue,
   meta: { touched, error, submitFailed },
   ...customProps
 }) => {
-  if (input.value === "" && customProps.cvalue) {
-    input.onChange(String(customProps.cvalue));
-  }
   return (
-    <TextField
-      label={label}
-      helperText={touched && error}
-      {...input}
-      {...customProps}
-    />
+    <div>
+      <label>{label}</label>
+      <div>
+        <input {...input} placeholder={label} type={type} {...customProps} />
+        {touched && error && submitFailed && <span>{error}</span>}
+      </div>
+    </div>
   );
 };
 
