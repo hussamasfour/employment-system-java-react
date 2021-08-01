@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router";
 import Dashboard from "./dashboard/Dashboard";
 import EmployeeEdit from "./employee/EmployeeEdit";
 import EmployeeNew from "./employee/EmployeeNew";
-
+import "./App.css";
 import Login from "./login/Login";
 const App = () => {
   return (

@@ -24,7 +24,7 @@ export const loginFailure = (error) => {
 
 export const fetchUser = (formValues, history) => async (dispatch) => {
   try {
-    dispatch(loginStart);
+    dispatch(loginStart());
     const response = await employeesApi.post("/api/login", formValues);
     if (response.status === 200) {
       localStorage.setItem("token", response.data.accessToken);

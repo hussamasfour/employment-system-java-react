@@ -21,27 +21,44 @@ const Dashboard = () => {
   }
   return (
     <div>
-      <h1>Employees List</h1>
+      <h1>Dashboard</h1>
+      <div className="row">
+        <div className="border p-4 col-md-12 shadow-sm p-3 mb-5 bg-white rounded">
+          <table className="table">
+            <thead>
+              <tr scope="row ">
+                <th scope="col" className="p-3">
+                  Emp ID
+                </th>
+                <th scope="col" className="p-3">
+                  First Name
+                </th>
+                <th scope="col" className="p-3">
+                  Last Name
+                </th>
+                <th scope="col" className="p-3">
+                  Age
+                </th>
+                <th scope="col" className="p-3">
+                  Salary
+                </th>
+                <th scope="col" className="p-3">
+                  Email
+                </th>
 
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Emp ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">DOB</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Email</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Edit/Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          {employeesList.map((employee) => (
-            <EmployeeItem employee={employee} key={employee.id} />
-          ))}
-        </tbody>
-      </table>
+                <th scope="col" className="p-3">
+                  Edit/Delete
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {employeesList.map((employee) => (
+                <EmployeeItem employee={employee} key={employee.id} />
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <CustomButton onClick={() => history.push("/employee/new")}>
         Add Employee

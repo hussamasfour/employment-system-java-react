@@ -17,6 +17,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: true,
+        errorMessage: null,
       };
     case SIGN_IN_SUCCESS:
       return {
