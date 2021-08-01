@@ -105,11 +105,8 @@ public class UserServiceImpl implements UserService {
             jwtResponse.setRoles(roles);
 
             return jwtResponse;
-        }catch (InvalidArgumentException e){
-            throw new InvalidArgumentException("Username/password is not correct!!");
-        }
-        catch (UsernameNotFoundException e){
-            throw new UsernameNotFoundException("User name not found");
+        }catch (BadCredentialsException e){
+            throw new BadCredentialsException("Username/Password is not correct");
         }
     }
 
