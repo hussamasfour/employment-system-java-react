@@ -29,38 +29,40 @@ const Login = ({ handleSubmit }) => {
         >
           <div className="card-body p-5 text-center">
             <div className="mb-md-5 mt-md-4 pb-5">
-              <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-              <p className="text-white-50 mb-5">
-                Please enter your username and password!
-              </p>
+              <div className="mb-md-5 mt-md-4 pb-5">
+                <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                <p className="text-white-50 mb-5">
+                  Please enter your username and password!
+                </p>
 
-              {error ? <span className="bg-danger">{error}</span> : null}
-              <form onSubmit={handleSubmit(onSubmitHandler)}>
-                <Field
-                  name="username"
-                  type="text"
-                  label="Username"
-                  id="username"
-                  className="form-control form-control-lg"
-                  component={InputField}
-                />
+                {error ? <span className="bg-danger">{error}</span> : null}
+                <form onSubmit={handleSubmit(onSubmitHandler)}>
+                  <Field
+                    name="username"
+                    type="text"
+                    label="Username"
+                    id="username"
+                    className="form-control form-control-lg"
+                    component={InputField}
+                  />
 
-                <Field
-                  name="password"
-                  type="password"
-                  label="Password"
-                  id="password"
-                  className="form-control form-control-lg"
-                  component={InputField}
-                />
+                  <Field
+                    name="password"
+                    type="password"
+                    label="Password"
+                    id="password"
+                    className="form-control form-control-lg"
+                    component={InputField}
+                  />
 
-                <CustomButton
-                  type="submit"
-                  className="btn btn-outline-light btn-lg px-5"
-                >
-                  Login
-                </CustomButton>
-              </form>
+                  <CustomButton
+                    type="submit"
+                    className="btn btn-outline-light btn-lg px-5"
+                  >
+                    Login
+                  </CustomButton>
+                </form>
+              </div>
             </div>
           </div>
         </div>
