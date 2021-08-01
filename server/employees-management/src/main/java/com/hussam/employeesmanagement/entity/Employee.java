@@ -18,7 +18,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dob;
     @Column(unique = true,updatable = false)
     private String empId;
