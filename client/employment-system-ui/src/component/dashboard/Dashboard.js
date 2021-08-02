@@ -21,13 +21,17 @@ const Dashboard = () => {
   }
   return (
     <div>
-      <h1>Dashboard</h1>
       <div className="row">
-        <div className="border p-4 col-md-12 shadow-sm p-3 mb-5 bg-white rounded">
-          <table className="table">
+        <div className="col-lg-12">
+          <h1 className="pb-4 text-white pl-0">Dashboard</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="border p-4 col-md-12 shadow-sm p-3 mb-5 bg-white rounded col-lg-12">
+          <table className="table col-lg-12">
             <thead>
-              <tr scope="row ">
-                <th scope="col" className="p-3">
+              <tr scope="row">
+                <th scope="col" className="p-3 ">
                   Emp ID
                 </th>
                 <th scope="col" className="p-3">
@@ -59,10 +63,16 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-
-      <CustomButton onClick={() => history.push("/employee/new")}>
-        Add Employee
-      </CustomButton>
+      <div className="row">
+        <div className="col-lg-12 d-flex justify-content-end ">
+          <CustomButton
+            onClick={() => history.push("/employee/new")}
+            className="btn btn-success btn-lg "
+          >
+            Add Employee
+          </CustomButton>
+        </div>
+      </div>
     </div>
   );
 };

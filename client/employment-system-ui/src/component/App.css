@@ -3,11 +3,5 @@ body {
   font-family: "Open sans condensed";
   width: 100%;
   box-sizing: border-box;
-
-  background: "#6a11cb";
-  background: linear-gradient(
-    to right,
-    rgba(106, 17, 203, 1),
-    rgba(37, 117, 252, 1)
-  );
+  background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
 }
