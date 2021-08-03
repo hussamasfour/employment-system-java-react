@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class NewEmployeeRequest {
 
 //    @JsonFormat( pattern="yyyy-MM-dd")
     private Date dob;
-    @NotBlank
+    @NotNull
     private Long salary;
     @NotBlank(message = "Must specify a gender")
     private String gender;

@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
 
             return jwtResponse;
         }catch (BadCredentialsException e){
-            throw new BadCredentialsException("Username/Password is not correct");
+            throw new InvalidArgumentException("Username/Password is not correct");
         }
     }
 
