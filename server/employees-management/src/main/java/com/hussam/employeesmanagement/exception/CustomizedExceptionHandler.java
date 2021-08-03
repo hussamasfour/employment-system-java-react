@@ -1,8 +1,11 @@
 package com.hussam.employeesmanagement.exception;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -49,4 +52,14 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @Override
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest webRequest) {
+
+        List<String > details = new ArrayList<>();
+        for (ObjectError error: ex.getBindingResult().getAllErrors()){
+            details.add(error.getDefaultMessage());
+        }
+        ExceptionResponse exceptionResponse =  new ExceptionResponse(new Date(), "Validation Failed", details,webRequest.getDescription(false) );
+        return  new ResponseEntity<>(exceptionResponse, headers, HttpStatus.BAD_REQUEST);
+    }
 }

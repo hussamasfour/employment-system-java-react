@@ -58,10 +58,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             newEmployee.setGender(Gender.FEMALE);
         }
         newEmployee.setUser(user);
-        List<Employee> employeeList = new ArrayList<>();
-        employeeList.add(newEmployee);
-
-        user.setEmployeeList(employeeList);
 
         employeeRepository.save(newEmployee);
     }

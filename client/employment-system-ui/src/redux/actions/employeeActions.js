@@ -4,6 +4,7 @@ import {
   DELETE_EMPLOYEE,
   FETCH_EMPLOYEES,
   FETCH_EMPLOYEE_BY_ID,
+  FETCH_EMPLOYEE_FAILURE,
   UPDATE_EMPLOYEE,
 } from "./type";
 
@@ -12,7 +13,10 @@ export const fetchEmployees = () => async (dispatch) => {
     const response = await employeesApi.get("/api/employees");
     dispatch({ type: FETCH_EMPLOYEES, payload: response.data });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: FETCH_EMPLOYEE_FAILURE,
+      payload: error.response.data.message,
+    });
   }
 };
 
@@ -22,7 +26,10 @@ export const addEmployee = (values, history) => async (dispatch) => {
     dispatch({ type: ADD_EMPLOYEE, payload: response.data });
     history.push("/dashboard");
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: FETCH_EMPLOYEE_FAILURE,
+      payload: error.response.data.message,
+    });
   }
 };
 
@@ -35,7 +42,10 @@ export const updateEmployee = (values, history) => async (dispatch) => {
     dispatch({ type: UPDATE_EMPLOYEE, payload: response.data });
     history.push("/dashboard");
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: FETCH_EMPLOYEE_FAILURE,
+      payload: error.response.data.message,
+    });
   }
 };
 
@@ -44,7 +54,10 @@ export const fetchEmployeeById = (id) => async (dispatch) => {
     const response = await employeesApi.get("/api/employee/" + id);
     dispatch({ type: FETCH_EMPLOYEE_BY_ID, payload: response.data });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: FETCH_EMPLOYEE_FAILURE,
+      payload: error.response.data.message,
+    });
   }
 };
 
@@ -53,6 +66,9 @@ export const deleteEmployeeById = (id) => async (dispatch) => {
     const response = await employeesApi.delete("/api/employee/" + id);
     dispatch({ type: DELETE_EMPLOYEE, payload: response.data });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({
+      type: FETCH_EMPLOYEE_FAILURE,
+      payload: error.response.data.message,
+    });
   }
 };

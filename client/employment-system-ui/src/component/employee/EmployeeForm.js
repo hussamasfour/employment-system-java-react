@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { reduxForm, Field } from "redux-form";
@@ -15,6 +15,7 @@ const EmployeeForm = ({
 }) => {
   const title = editMode ? "Edit post" : "Add new Employee";
   const buttonText = editMode ? "Edit" : "Add";
+  const error = useSelector((state) => state.employee.errorMessage);
   const history = useHistory();
 
   const onSubmit = (values) => {
@@ -33,6 +34,13 @@ const EmployeeForm = ({
         >
           <div className="card-body p-5 ">
             <h2 className="fw-bold mb-2 text-uppercase">{title}</h2>
+            {error ? (
+              <div className="bg-danger">
+                {error.map((err) => (
+                  <div>{err}</div>
+                ))}
+              </div>
+            ) : null}
             <form onSubmit={handleSubmit(onSubmit)}>
               <Field
                 name="id"

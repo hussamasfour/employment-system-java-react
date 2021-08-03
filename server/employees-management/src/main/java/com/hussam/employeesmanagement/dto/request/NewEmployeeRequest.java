@@ -8,10 +8,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Data
@@ -19,15 +16,15 @@ import java.util.Date;
 @Setter
 public class NewEmployeeRequest {
     @NotBlank(message = "You must enter a first name")
-    @Size(min=3, message = "First name must be at least 3 characters")
+    @Min(value=3, message = "First name must be at least 3 characters")
     private String firstName;
     @NotBlank(message = "You must enter last name")
-    @Size(min=3, message = "LastName must be at least 3 characters")
+    @Min(value=3, message = "LastName must be at least 3 characters")
     private String lastName;
 
 //    @JsonFormat( pattern="yyyy-MM-dd")
     private Date dob;
-    @NotNull
+    @NotNull(message = "Salary is required")
     private Long salary;
     @NotBlank(message = "Must specify a gender")
     private String gender;
