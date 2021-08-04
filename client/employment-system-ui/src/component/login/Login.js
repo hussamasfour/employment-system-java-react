@@ -18,7 +18,7 @@ const Login = ({ handleSubmit }) => {
   };
 
   if (isLoggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/" />;
   }
   return (
     <div className="row d-flex justify-content-center align-item-center h-100">

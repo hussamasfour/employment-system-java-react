@@ -137,7 +137,7 @@ const EmployeeForm = ({
                   </CustomButton>
 
                   <CustomButton
-                    onClick={() => history.push("/dashboard")}
+                    onClick={() => history.push("/")}
                     className="btn btn-danger"
                   >
                     Cancel

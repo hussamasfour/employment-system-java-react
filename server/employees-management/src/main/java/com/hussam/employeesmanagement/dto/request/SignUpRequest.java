@@ -22,6 +22,6 @@ public class SignUpRequest {
     private String email;
 
     @NotBlank
-    @Size(min = 8, message = "Password must be more than 8 characters")
+    @Size(min = 8, max = 30 ,message = "Password must be more than 8 characters")
     private String password;
 }

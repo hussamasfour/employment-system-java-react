@@ -6,6 +6,12 @@ export const SIGN_IN_START = "SIGN_IN_START";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
 export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE";
 export const REFRESH_TOKEN = "REFRESH_TOKEN";
+
+export const SIGN_UP_START = "SIGN_UP_START";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
+
+export const LOGOUT = "LOGOUT";
 // EMPLOYEES TYPES
 export const FETCH_EMPLOYEES = "FETCH_EMPLOYEES";
 export const FETCH_EMPLOYEE_BY_ID = "FETCH_EMPLOYEE_BY_ID";

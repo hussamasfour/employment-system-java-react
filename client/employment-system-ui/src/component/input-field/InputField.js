@@ -11,7 +11,13 @@ const InputField = ({
       <label className="form-label" htmlFor={label}>
         {label}
       </label>
-      <input {...input} type={type} {...customProps} id={label} />
+      <input
+        {...input}
+        type={type}
+        {...customProps}
+        id={label}
+        placeholder={label}
+      />
       {touched && error && submitFailed && (
         <span className="bg-danger">{error}</span>
       )}
