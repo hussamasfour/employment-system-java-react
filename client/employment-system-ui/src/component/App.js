@@ -12,8 +12,8 @@ const App = () => {
       <Header />
       <div className="container h-100">
         <Switch>
+          <Route path="/" exact component={Dashboard} />
           <Route path="/login" exact component={Login} />
-          <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/employee/new" exact component={EmployeeNew} />
           <Route path="/employee/:id/edit" exact component={EmployeeEdit} />
         </Switch>
