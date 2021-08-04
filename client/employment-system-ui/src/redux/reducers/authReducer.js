@@ -1,15 +1,25 @@
 import {
+  REFRESH_TOKEN,
   SIGN_IN_FAILURE,
   SIGN_IN_START,
   SIGN_IN_SUCCESS,
 } from "../actions/type";
 
-const INITIAL_STATE = {
-  isLoading: false,
-  isLoggedIn: false,
-  user: null,
-  errorMessage: null,
-};
+const user = JSON.parse(localStorage.getItem("user"));
+
+const INITIAL_STATE = user
+  ? {
+      isLoading: false,
+      isLoggedIn: true,
+      user,
+      errorMessage: null,
+    }
+  : {
+      isLoading: false,
+      isLoggedIn: false,
+      user: null,
+      errorMessage: null,
+    };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -32,6 +42,11 @@ export default (state = INITIAL_STATE, action) => {
         isLoading: false,
         user: null,
         errorMessage: action.payload,
+      };
+    case REFRESH_TOKEN:
+      return {
+        ...state,
+        user: { ...user, accessToken: action.payload },
       };
     default:
       return state;

@@ -14,7 +14,7 @@ import java.util.List;
 public class JwtResponse {
     private Long id;
     private String accessToken;
-//    private String refreshToken;
+    private String refreshToken;
     private String username;
     private String type = "Bearer";
     private String email;

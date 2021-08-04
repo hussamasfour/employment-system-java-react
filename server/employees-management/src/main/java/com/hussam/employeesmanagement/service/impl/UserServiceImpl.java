@@ -3,6 +3,7 @@ package com.hussam.employeesmanagement.service.impl;
 import com.hussam.employeesmanagement.dto.request.LoginRequest;
 import com.hussam.employeesmanagement.dto.request.SignUpRequest;
 import com.hussam.employeesmanagement.dto.response.JwtResponse;
+import com.hussam.employeesmanagement.entity.RefreshToken;
 import com.hussam.employeesmanagement.entity.Role;
 import com.hussam.employeesmanagement.entity.RoleType;
 import com.hussam.employeesmanagement.entity.User;
@@ -13,6 +14,7 @@ import com.hussam.employeesmanagement.repository.UserRepository;
 import com.hussam.employeesmanagement.security.userService.UserDetailsImp;
 import com.hussam.employeesmanagement.security.util.JwtUtils;
 
+import com.hussam.employeesmanagement.service.RefreshTokenService;
 import com.hussam.employeesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -94,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
             List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority())
                     .collect(Collectors.toList());
-
+            RefreshToken refreshToken= refreshTokenService.createRefreshToken(userDetails.getId());
 
             JwtResponse jwtResponse = new JwtResponse();
 
@@ -102,8 +107,10 @@ public class UserServiceImpl implements UserService {
             jwtResponse.setUsername(userDetails.getUsername());
             jwtResponse.setAccessToken(jwt);
             jwtResponse.setId(userDetails.getId());
-//        jwtResponse.setRefreshToken(refreshToken.getToken());
+        jwtResponse.setRefreshToken(refreshToken.getToken());
             jwtResponse.setRoles(roles);
+
+
 
             return jwtResponse;
         }catch (BadCredentialsException e){

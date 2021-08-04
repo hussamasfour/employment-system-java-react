@@ -10,7 +10,7 @@ import {
 
 export const fetchEmployees = () => async (dispatch) => {
   try {
-    const response = await employeesApi.get("/api/employees");
+    const response = await employeesApi.get("/employees");
     dispatch({ type: FETCH_EMPLOYEES, payload: response.data });
   } catch (error) {
     dispatch({
@@ -22,7 +22,7 @@ export const fetchEmployees = () => async (dispatch) => {
 
 export const addEmployee = (values, history) => async (dispatch) => {
   try {
-    const response = await employeesApi.post("/api/employees", values);
+    const response = await employeesApi.post("/employees", values);
     dispatch({ type: ADD_EMPLOYEE, payload: response.data });
     history.push("/dashboard");
   } catch (error) {
@@ -35,10 +35,7 @@ export const addEmployee = (values, history) => async (dispatch) => {
 
 export const updateEmployee = (values, history) => async (dispatch) => {
   try {
-    const response = await employeesApi.put(
-      "/api/employee/" + values.id,
-      values
-    );
+    const response = await employeesApi.put("/employee/" + values.id, values);
     dispatch({ type: UPDATE_EMPLOYEE, payload: response.data });
     history.push("/dashboard");
   } catch (error) {
@@ -51,7 +48,7 @@ export const updateEmployee = (values, history) => async (dispatch) => {
 
 export const fetchEmployeeById = (id) => async (dispatch) => {
   try {
-    const response = await employeesApi.get("/api/employee/" + id);
+    const response = await employeesApi.get("/employee/" + id);
     dispatch({ type: FETCH_EMPLOYEE_BY_ID, payload: response.data });
   } catch (error) {
     dispatch({
@@ -63,7 +60,7 @@ export const fetchEmployeeById = (id) => async (dispatch) => {
 
 export const deleteEmployeeById = (id) => async (dispatch) => {
   try {
-    const response = await employeesApi.delete("/api/employee/" + id);
+    const response = await employeesApi.delete("/employee/" + id);
     dispatch({ type: DELETE_EMPLOYEE, payload: response.data });
   } catch (error) {
     dispatch({

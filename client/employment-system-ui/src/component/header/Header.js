@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light  bg-light shadow-md border-bottom border-warning mb-5 text-dark">
       <div className="container-fluid">
@@ -11,7 +12,6 @@ const Header = () => {
 
         {isLoggedIn ? (
           <span className="p-3 text-danger" style={{ cursor: "pointer" }}>
-            {" "}
             Logout
           </span>
         ) : (

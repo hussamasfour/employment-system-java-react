@@ -1,11 +1,18 @@
 package com.hussam.employeesmanagement.controller;
 
 import com.hussam.employeesmanagement.dto.request.LoginRequest;
+import com.hussam.employeesmanagement.dto.request.RefreshTokenRequest;
 import com.hussam.employeesmanagement.dto.request.SignUpRequest;
 import com.hussam.employeesmanagement.dto.response.JwtResponse;
+import com.hussam.employeesmanagement.dto.response.RefreshTokenResponse;
 import com.hussam.employeesmanagement.dto.response.SignUpResponse;
+import com.hussam.employeesmanagement.entity.RefreshToken;
 import com.hussam.employeesmanagement.entity.User;
+import com.hussam.employeesmanagement.exception.TokenRefreshException;
+import com.hussam.employeesmanagement.security.util.JwtUtils;
+import com.hussam.employeesmanagement.service.RefreshTokenService;
 import com.hussam.employeesmanagement.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,53 +24,43 @@ import javax.validation.Valid;
 @RequestMapping("/api")
 @CrossOrigin
 public class AuthController {
-    private final UserService userService;
+    @Autowired
+    private  UserService userService;
 
-    public AuthController(UserService userService) {
-        this.userService = userService;
-    }
+    @Autowired
+    JwtUtils jwtUtils;
 
+    @Autowired
+    private RefreshTokenService refreshTokenService;
     @PostMapping("/signup")
     ResponseEntity<SignUpResponse>  register(@Valid @RequestBody SignUpRequest signUpRequest) throws Exception {
-       User user =  userService.signUp(signUpRequest);
-       if(user == null){
-           return ResponseEntity.badRequest().body(new SignUpResponse("Sorry failed signing up !"));
-       }
+        userService.signUp(signUpRequest);
 
        return ResponseEntity.ok( new SignUpResponse("Successfully created"));
     }
 
     @PostMapping("/login")
-    ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response){
+    ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginRequest loginRequest){
         JwtResponse jwtResponse =  userService.signIn(loginRequest);
-
-        Cookie jwtCookie = new Cookie("auth" , jwtResponse.getAccessToken());
-
-        jwtCookie.setHttpOnly(true);
-        jwtCookie.setSecure(false);
-        jwtCookie.setPath("/");
-        jwtCookie.setMaxAge(7 * 24 * 60 * 60);
-        response.addCookie(jwtCookie);
-
 
         return ResponseEntity.ok(jwtResponse);
     }
 
-//    @PostMapping("/refreshtoken")
-//    public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
-//        String requestRefreshToken = request.getRefreshToken();
-//
-//        return refreshTokenService.findByToken(requestRefreshToken)
-//                .map(refreshTokenService::verifyExpiration)
-//                .map(RefreshToken::getUser)
-//                .map(user -> {
-//                    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
-//                    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
-//                })
-//                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-//                        "Refresh token is not in database!"));
-//    }
-//
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<?> refreshtoken(@Valid @RequestBody RefreshTokenRequest request) {
+        String requestRefreshToken = request.getRefreshToken();
+
+        return refreshTokenService.findByToken(requestRefreshToken)
+                .map(refreshTokenService::verifyExpiration)
+                .map(RefreshToken::getUser)
+                .map(user -> {
+                    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
+                    return ResponseEntity.ok(new RefreshTokenResponse(token, requestRefreshToken));
+                })
+                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
+                        "Refresh token is not in database!"));
+    }
+
 //    @PostMapping("/logout")
 //    public ResponseEntity<?> logoutUser(@Valid @RequestBody LogOutRequest logOutRequest) {
 //        refreshTokenService.deleteByUserId(logOutRequest.getUserId());

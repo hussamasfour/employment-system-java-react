@@ -46,19 +46,22 @@ public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyExistException.class)
-    public final ResponseEntity<ExceptionResponse> handleInvalidArgumentExceptions(
+    public final ResponseEntity<ExceptionResponse> handleUserAlreadyExistExceptions(
             UserAlreadyExistException ex,  WebRequest webRequest) {
         List<String> details = new ArrayList<>();
         details.add( ex.getLocalizedMessage());
         ExceptionResponse exceptionResponse=  new ExceptionResponse(new Date(), "Validation Failed", details,webRequest.getDescription(false) );
         return new ResponseEntity(exceptionResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
-//    @ExceptionHandler(ConstraintViolationException.class)
-//    public final ResponseEntity<Object> handleConstraintViolationExceptions(
-//            ConstraintViolationException ex) {
-//        String exceptionResponse = String.format("Invalid input parameters: %s\n", ex.getMessage());
-//        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
-//    }
+
+    @ExceptionHandler(TokenRefreshException.class)
+    public final ResponseEntity<ExceptionResponse> handleTokenRefreshExceptions(
+            TokenRefreshException ex,  WebRequest webRequest) {
+        List<String> details = new ArrayList<>();
+        details.add( ex.getLocalizedMessage());
+        ExceptionResponse exceptionResponse=  new ExceptionResponse(new Date(), "Validation Failed", details,webRequest.getDescription(false) );
+        return new ResponseEntity(exceptionResponse, new HttpHeaders(), HttpStatus.FORBIDDEN);
+    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest webRequest) {
