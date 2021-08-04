@@ -14,10 +14,10 @@ import java.util.Date;
 @Setter
 public class NewEmployeeRequest {
     @NotBlank(message = "You must enter a first name")
-    @Min(value=3, message = "FirstName must be at least 3 characters")
+    @Size(min=3, max=30 ,message = "FirstName must be between 3-30 characters")
     private String firstName;
     @NotBlank(message = "You must enter last name")
-    @Min(value=3, message = "LastName must be at least 3 characters")
+    @Size(min=3, max=30 ,message = "LastName must be between 3-30 characters")
     private String lastName;
 
 //    @JsonFormat( pattern="yyyy-MM-dd")
