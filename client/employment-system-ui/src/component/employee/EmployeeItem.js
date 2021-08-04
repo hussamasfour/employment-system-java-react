@@ -7,12 +7,14 @@ import calculateAge from "../../utils/calculateAge";
 
 import CustomButton from "../customButton/CustomButton";
 
-const EmployeeItem = ({ employee }) => {
+const EmployeeItem = ({ employee, onDeleteClick }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   return (
-    <tr scope="row">
-      <th className="p-3">{employee.empId}</th>
+    <tr>
+      <th className="p-3" scope="row">
+        {employee.empId}
+      </th>
       <td className="p-3 "> {employee.firstName}</td>
       <td className="p-3"> {employee.lastName}</td>
       <td className="p-3"> {calculateAge(employee.dob)}</td>
@@ -22,7 +24,7 @@ const EmployeeItem = ({ employee }) => {
           displayType={"text"}
           thousandSeparator={true}
           prefix={"$"}
-        />{" "}
+        />
       </td>
       <td className="p-3"> {employee.email}</td>
 
@@ -38,7 +40,7 @@ const EmployeeItem = ({ employee }) => {
 
         <CustomButton
           onClick={() => {
-            dispatch(deleteEmployeeById(employee.id));
+            onDeleteClick(employee.id);
           }}
           className=" btn-danger m-1"
         >

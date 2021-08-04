@@ -1,13 +1,11 @@
 package com.hussam.employeesmanagement.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.validation.constraints.*;
 import java.util.Date;
 
@@ -16,7 +14,7 @@ import java.util.Date;
 @Setter
 public class NewEmployeeRequest {
     @NotBlank(message = "You must enter a first name")
-    @Min(value=3, message = "First name must be at least 3 characters")
+    @Min(value=3, message = "FirstName must be at least 3 characters")
     private String firstName;
     @NotBlank(message = "You must enter last name")
     @Min(value=3, message = "LastName must be at least 3 characters")

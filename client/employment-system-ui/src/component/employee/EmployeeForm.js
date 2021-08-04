@@ -26,33 +26,35 @@ const EmployeeForm = ({
     }
   };
   return (
-    <div className="row d-flex justify-content-center align-item-center h-100">
-      <div className="col-12 col-md-8 col-lg-8 col-xl-7">
+    <div className="row d-flex justify-content-center align-item-center h-100 ">
+      <div className="col-12 col-md-8 col-lg-8 col-xl-7 ">
         <div
-          className="card bg-dark text-white"
+          className="card bg-dark text-white "
           style={{ borderRadius: "1rem" }}
         >
           <div className="card-body p-5 ">
-            <h2 className="fw-bold mb-2 text-uppercase">{title}</h2>
+            <h2 className="fw-bold mb-5 text-uppercase text-center">{title}</h2>
             {error ? (
-              <div className="bg-danger">
+              <div className="bg-danger mb-5">
                 {error.map((err) => (
                   <div>{err}</div>
                 ))}
               </div>
             ) : null}
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Field
-                name="id"
-                type="text"
-                disabled={editMode ? true : false}
-                label="id"
-                component={InputField}
-                hidden={editMode ? false : true}
-                className="form-control "
-              />
+              {editMode ? (
+                <Field
+                  name="empId"
+                  type="text"
+                  disabled
+                  label="Employee Id"
+                  component={InputField}
+                  className="form-control"
+                />
+              ) : null}
+
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-6 mb-3">
                   <Field
                     name="firstName"
                     type="text"
@@ -62,7 +64,7 @@ const EmployeeForm = ({
                   />
                 </div>
 
-                <div className="col-lg-6">
+                <div className="col-lg-6 ">
                   <Field
                     name="lastName"
                     type="text"
@@ -73,7 +75,7 @@ const EmployeeForm = ({
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-6 mb-3">
                   <Field
                     name="dob"
                     type="date"
@@ -93,7 +95,7 @@ const EmployeeForm = ({
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-6 mb-3">
                   <legend className="col-form-label">Gender</legend>
                   <div className="form-check form-check-inline">
                     <Field
@@ -118,7 +120,7 @@ const EmployeeForm = ({
                     <label className="form-check-label">Female</label>
                   </div>
                 </div>
-                <div className="col-lg-6">
+                <div className="col-lg-6 mb-3">
                   <Field
                     name="email"
                     type="text"
@@ -129,8 +131,8 @@ const EmployeeForm = ({
                 </div>
               </div>
               <div className="row">
-                <div className="col-lg-12">
-                  <CustomButton type="submit" className="btn btn-primary ">
+                <div className="col-lg-12 mb-5">
+                  <CustomButton type="submit" className="btn btn-primary me-2">
                     {buttonText}
                   </CustomButton>
 

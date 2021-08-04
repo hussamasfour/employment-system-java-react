@@ -11,7 +11,7 @@ const EmployeeEdit = () => {
 
   useEffect(() => {
     dispatch(fetchEmployeeById(id));
-  }, []);
+  }, [dispatch]);
 
   const handleEmpUpdate = (values, history) => {
     dispatch(updateEmployee(values, history));

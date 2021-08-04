@@ -3,7 +3,6 @@ const InputField = ({
   input,
   label,
   type,
-  cvalue,
   meta: { touched, error, submitFailed },
   ...customProps
 }) => {

@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
-import { fetchEmployees } from "../../redux/actions";
+import { deleteEmployeeById, fetchEmployees } from "../../redux/actions";
 import EmployeeItem from "../employee/EmployeeItem";
 import CustomButton from "../customButton/CustomButton";
 
 const Dashboard = () => {
+  const [isDeleted, setIsDeleted] = useState(false);
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const employeesList = useSelector((state) => state.employee.employees);
   const dispatch = useDispatch();
@@ -14,7 +16,11 @@ const Dashboard = () => {
 
   useEffect(() => {
     dispatch(fetchEmployees());
-  }, []);
+  }, [dispatch]);
+
+  const onDeleteClick = (employeeId) => {
+    dispatch(deleteEmployeeById(employeeId));
+  };
 
   if (!isLoggedIn) {
     return <Redirect to="/login" />;
@@ -22,16 +28,16 @@ const Dashboard = () => {
   return (
     <div>
       <div className="row">
-        <div className="col-lg-12">
-          <h1 className="pb-4 text-white pl-0">Dashboard</h1>
+        <div className="col-lg-12 pl-0">
+          <h1 className="my-5 text-white">Dashboard</h1>
         </div>
       </div>
       <div className="row">
-        <div className="border p-4 col-md-12 shadow-sm p-3 mb-5 bg-white rounded col-lg-12">
-          <table className="table col-lg-12">
+        <div className="col-lg-12 col-md-12 border border-warning p-4  mb-5 bg-light rounded table-responsive">
+          <table className="table col-lg-12 ">
             <thead>
-              <tr scope="row">
-                <th scope="col" className="p-3 ">
+              <tr>
+                <th scope="col" className="p-3">
                   Emp ID
                 </th>
                 <th scope="col" className="p-3">
@@ -57,7 +63,11 @@ const Dashboard = () => {
             </thead>
             <tbody>
               {employeesList.map((employee) => (
-                <EmployeeItem employee={employee} key={employee.id} />
+                <EmployeeItem
+                  employee={employee}
+                  key={employee.id}
+                  onDeleteClick={onDeleteClick}
+                />
               ))}
             </tbody>
           </table>
