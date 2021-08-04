@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
@@ -7,16 +7,13 @@ import EmployeeItem from "../employee/EmployeeItem";
 import CustomButton from "../customButton/CustomButton";
 
 const Dashboard = () => {
-  const [isDeleted, setIsDeleted] = useState(false);
-
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const employeesList = useSelector((state) => state.employee.employees);
   const dispatch = useDispatch();
   const history = useHistory();
-
   useEffect(() => {
     dispatch(fetchEmployees());
-  }, [dispatch]);
+  }, []);
 
   const onDeleteClick = (employeeId) => {
     dispatch(deleteEmployeeById(employeeId));

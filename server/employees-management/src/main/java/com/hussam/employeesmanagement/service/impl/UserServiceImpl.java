@@ -7,6 +7,7 @@ import com.hussam.employeesmanagement.entity.Role;
 import com.hussam.employeesmanagement.entity.RoleType;
 import com.hussam.employeesmanagement.entity.User;
 import com.hussam.employeesmanagement.exception.InvalidArgumentException;
+import com.hussam.employeesmanagement.exception.UserAlreadyExistException;
 import com.hussam.employeesmanagement.repository.RoleRepository;
 import com.hussam.employeesmanagement.repository.UserRepository;
 import com.hussam.employeesmanagement.security.userService.UserDetailsImp;
@@ -54,11 +55,11 @@ public class UserServiceImpl implements UserService {
 
         // checking if email is already exists
         if(userRepository.existsByEmail(signUpRequest.getEmail())){
-            throw new IllegalArgumentException("Error!! email is already in use!!");
+            throw new UserAlreadyExistException("Failed!! email is already in use!!");
         }
 
         if(userRepository.existsByUsername(signUpRequest.getUsername())){
-            throw new IllegalArgumentException("Error!! Username is already in use!!");
+            throw new UserAlreadyExistException("Failed!! Username is already in use!!");
         }
 
         Set<Role> roles = new HashSet<>();

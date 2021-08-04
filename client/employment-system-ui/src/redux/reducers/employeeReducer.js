@@ -9,7 +9,7 @@ import {
 const INITIAL_STATE = {
   employees: [],
   emp: {},
-  ms: "",
+  ms: null,
   errorMessage: null,
 };
 export default (state = INITIAL_STATE, action) => {

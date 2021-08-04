@@ -5,6 +5,7 @@ import com.hussam.employeesmanagement.entity.Employee;
 import com.hussam.employeesmanagement.entity.Gender;
 import com.hussam.employeesmanagement.entity.User;
 import com.hussam.employeesmanagement.exception.NotFoundException;
+import com.hussam.employeesmanagement.exception.UserAlreadyExistException;
 import com.hussam.employeesmanagement.repository.EmployeeRepository;
 import com.hussam.employeesmanagement.security.userService.UserDetailsImp;
 import com.hussam.employeesmanagement.security.util.GenerateEmpId;
@@ -41,7 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void addEmployee(NewEmployeeRequest employee, UserDetailsImp userDetail) {
         User user = userService.getUserByUsername(userDetail.getUsername());
-
+        if(employeeRepository.existsByEmail(employee.getEmail())){
+            throw new UserAlreadyExistException("Failed!! Email is already exists ");
+        }
         GenerateEmpId generateEmpId = new GenerateEmpId();
         String empId =  generateEmpId.empIdGenerator(employee.getFirstName(), employee.getLastName());
         Employee newEmployee = new Employee();
