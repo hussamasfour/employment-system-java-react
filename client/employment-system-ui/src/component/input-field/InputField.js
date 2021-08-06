@@ -8,7 +8,7 @@ const InputField = ({
 }) => {
   return (
     <div className="form-outline form-white mb-4">
-      <label className="form-label" htmlFor={label}>
+      <label className="form-label text-uppercase" htmlFor={label}>
         {label}
       </label>
       <input

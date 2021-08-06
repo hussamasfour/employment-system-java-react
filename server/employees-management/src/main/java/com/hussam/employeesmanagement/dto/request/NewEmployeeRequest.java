@@ -31,4 +31,6 @@ public class NewEmployeeRequest {
     @NotBlank(message = "Email is required")
     private String email;
 
+    @NotBlank(message = "Department is required")
+    private String department;
 }

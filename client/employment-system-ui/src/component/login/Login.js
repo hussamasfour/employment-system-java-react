@@ -22,18 +22,20 @@ const Login = ({ handleSubmit }) => {
   }
   return (
     <div className="row d-flex justify-content-center align-item-center h-100">
-      <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div className="col-12 col-md-8 col-lg-6 col-xl-6">
         <div
           className="card bg-dark text-white"
           style={{ borderRadius: "1rem" }}
         >
-          <div className="card-body p-5 text-center">
+          <div className="card-body p-5">
             <div className="mb-md-5 mt-md-4 pb-5">
-              <div className="mb-md-5 mt-md-4 pb-5">
-                <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                <p className="text-white-50 mb-5">
-                  Please enter your username and password!
-                </p>
+              <div className="mb-md-5 mt-md-4">
+                <div className="text-center">
+                  <h2 className="fw-bold mb-2 text-uppercase ">Login</h2>
+                  <p className="text-white-50 mb-5">
+                    Please enter your username and password!
+                  </p>
+                </div>
 
                 {error ? <span className="bg-danger">{error}</span> : null}
                 <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -42,7 +44,7 @@ const Login = ({ handleSubmit }) => {
                     type="text"
                     label="Username"
                     id="username"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg mb-5"
                     component={InputField}
                   />
 
@@ -51,13 +53,13 @@ const Login = ({ handleSubmit }) => {
                     type="password"
                     label="Password"
                     id="password"
-                    className="form-control form-control-lg"
+                    className="form-control form-control-lg mb-5"
                     component={InputField}
                   />
 
                   <CustomButton
                     type="submit"
-                    className="btn btn-outline-light btn-lg px-5"
+                    className="btn btn-outline-light btn-lg px-5 text-center"
                   >
                     Login
                   </CustomButton>

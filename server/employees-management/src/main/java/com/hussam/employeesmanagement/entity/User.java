@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,7 +24,6 @@ public class User {
     @Column(unique = true, updatable = false)
     private String email;
     @JsonIgnore
-
     private String password;
 
     @Temporal(TemporalType.TIMESTAMP)

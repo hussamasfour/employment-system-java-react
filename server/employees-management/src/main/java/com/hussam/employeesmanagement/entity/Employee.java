@@ -32,4 +32,9 @@ public class Employee {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "department_id")
+
+    private Department department;
 }

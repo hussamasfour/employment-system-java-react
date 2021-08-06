@@ -2,14 +2,13 @@ import React from "react";
 import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { deleteEmployeeById } from "../../redux/actions";
 import calculateAge from "../../utils/calculateAge";
 
 import CustomButton from "../customButton/CustomButton";
 
 const EmployeeItem = ({ employee, onDeleteClick }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
+
   return (
     <tr>
       <th className="p-3" scope="row">
@@ -17,6 +16,7 @@ const EmployeeItem = ({ employee, onDeleteClick }) => {
       </th>
       <td className="p-3 "> {employee.firstName}</td>
       <td className="p-3"> {employee.lastName}</td>
+      <td className="p-3"> {employee.department.departmentName}</td>
       <td className="p-3"> {calculateAge(employee.dob)}</td>
       <td className="p-3">
         <CurrencyFormat

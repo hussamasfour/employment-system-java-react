@@ -23,7 +23,7 @@ public class JwtAuthEntry implements AuthenticationEntryPoint {
 
         final Map<String, Object> body = new HashMap<>();
         body.put("code", HttpServletResponse.SC_UNAUTHORIZED);
-        body.put("payload", "You need to login first in order to perform this action.");
+        body.put("message", "You need to login first in order to perform this action.");
 
         final ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(httpServletResponse.getOutputStream(), body);

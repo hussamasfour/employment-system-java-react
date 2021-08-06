@@ -27,16 +27,16 @@ const EmployeeForm = ({
   };
   return (
     <div className="row d-flex justify-content-center align-item-center h-100 ">
-      <div className="col-12 col-md-8 col-lg-8 col-xl-7 ">
+      <div className="col-12 col-md-8 col-lg-8 col-xl-12 ">
         <div
           className="card bg-dark text-white "
           style={{ borderRadius: "1rem" }}
         >
           <div className="card-body p-5 ">
-            <h2 className="fw-bold mb-5 text-uppercase text-center">{title}</h2>
+            <h2 className="fw-bold mb-5 text-uppercase text-">{title}</h2>
             {error ? (
               <div className="bg-danger mb-5">
-                {error.map((err) => (
+                {error.data.message.map((err) => (
                   <div>{err}</div>
                 ))}
               </div>
@@ -49,7 +49,7 @@ const EmployeeForm = ({
                   disabled
                   label="Employee Id"
                   component={InputField}
-                  className="form-control"
+                  className="form-control form-control-lg"
                 />
               ) : null}
 
@@ -60,17 +60,17 @@ const EmployeeForm = ({
                     type="text"
                     label="First Name"
                     component={InputField}
-                    className="form-control"
+                    className="form-control form-control-lg"
                   />
                 </div>
 
-                <div className="col-lg-6 ">
+                <div className="col-lg-6 mb-3">
                   <Field
                     name="lastName"
                     type="text"
                     label="Last Name"
                     component={InputField}
-                    className="form-control"
+                    className="form-control form-control-lg"
                   />
                 </div>
               </div>
@@ -81,16 +81,16 @@ const EmployeeForm = ({
                     type="date"
                     label="DOB"
                     component={InputField}
-                    className="form-control"
+                    className="form-control form-control-lg"
                   />
                 </div>
-                <div className="col-lg-6">
+                <div className="col-lg-6 mb-3">
                   <Field
                     name="salary"
                     type="number"
                     label="Salary"
                     component={InputField}
-                    className="form-control"
+                    className="form-control form-control-lg"
                   />
                 </div>
               </div>
@@ -126,10 +126,37 @@ const EmployeeForm = ({
                     type="text"
                     label="Email"
                     component={InputField}
-                    className="form-control"
+                    className="form-control form-control-lg"
                   />
                 </div>
               </div>
+              {editMode ? null : (
+                <div className="row">
+                  <div className="col-lg-12 mb-3">
+                    <label
+                      className="col-form-label text-uppercase"
+                      htmlFor="department"
+                    >
+                      Department
+                    </label>
+                    <Field
+                      name="department"
+                      id="department"
+                      label="Department"
+                      component="select"
+                      className="form-select form-select-lg"
+                    >
+                      <option></option>
+                      <option value="IT">IT</option>
+                      <option value="Acountant">Acountant</option>
+                      <option value="Cybersecurity">Cybersecurity</option>
+                      <option value="Sales">Sales</option>
+                      <option value="Finance">Finance</option>
+                      <option value="Marketing">Marketing</option>
+                    </Field>
+                  </div>
+                </div>
+              )}
               <div className="row">
                 <div className="col-lg-12 mb-5">
                   <CustomButton type="submit" className="btn btn-primary me-2">

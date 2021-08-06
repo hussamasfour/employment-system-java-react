@@ -1,8 +1,6 @@
 import employeesApi from "./employeesApi";
-
 import TokenService from "../utils/tokenService";
 import { refreshToken } from "../redux/actions";
-import { useHistory } from "react-router-dom";
 
 const setup = (store) => {
   employeesApi.interceptors.request.use(

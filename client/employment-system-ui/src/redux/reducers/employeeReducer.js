@@ -4,13 +4,14 @@ import {
   FETCH_EMPLOYEE_BY_ID,
   FETCH_EMPLOYEE_FAILURE,
   UPDATE_EMPLOYEE,
+  DELETE_EMPLOYEE,
 } from "../actions/type";
 
 const INITIAL_STATE = {
   employees: [],
-  emp: {},
+  emp: null,
   ms: null,
-  errorMessage: null,
+  errorMessage: [],
 };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -32,7 +33,13 @@ export default (state = INITIAL_STATE, action) => {
         ),
         errorMessage: null,
       };
-
+    case DELETE_EMPLOYEE:
+      return {
+        ...state,
+        employees: state.employees.filter((emp) => {
+          return emp.id !== action.payload;
+        }),
+      };
     case FETCH_EMPLOYEE_BY_ID:
       return { ...state, emp: action.payload, errorMessage: null };
 

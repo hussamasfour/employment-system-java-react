@@ -13,7 +13,7 @@ const Dashboard = () => {
   const history = useHistory();
   useEffect(() => {
     dispatch(fetchEmployees());
-  }, []);
+  }, [dispatch]);
 
   const onDeleteClick = (employeeId) => {
     dispatch(deleteEmployeeById(employeeId));
@@ -44,6 +44,9 @@ const Dashboard = () => {
                   Last Name
                 </th>
                 <th scope="col" className="p-3">
+                  Department
+                </th>
+                <th scope="col" className="p-3">
                   Age
                 </th>
                 <th scope="col" className="p-3">
@@ -59,10 +62,10 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {employeesList.map((employee) => (
+              {employeesList.map((employee, index) => (
                 <EmployeeItem
                   employee={employee}
-                  key={employee.id}
+                  key={index}
                   onDeleteClick={onDeleteClick}
                 />
               ))}

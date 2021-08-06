@@ -1,6 +1,7 @@
 package com.hussam.employeesmanagement.service.impl;
 
 import com.hussam.employeesmanagement.dto.request.NewEmployeeRequest;
+import com.hussam.employeesmanagement.entity.Department;
 import com.hussam.employeesmanagement.entity.Employee;
 import com.hussam.employeesmanagement.entity.Gender;
 import com.hussam.employeesmanagement.entity.User;
@@ -9,6 +10,7 @@ import com.hussam.employeesmanagement.exception.UserAlreadyExistException;
 import com.hussam.employeesmanagement.repository.EmployeeRepository;
 import com.hussam.employeesmanagement.security.userService.UserDetailsImp;
 import com.hussam.employeesmanagement.security.util.GenerateEmpId;
+import com.hussam.employeesmanagement.service.DepartmentService;
 import com.hussam.employeesmanagement.service.EmployeeService;
 import com.hussam.employeesmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DepartmentService departmentService;
+
     @Override
     public Optional<Employee> getEmployeeById(Long id, UserDetailsImp userDetails) {
         User user = userService.getUserByUsername(userDetails.getUsername());
@@ -45,6 +50,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(employeeRepository.existsByEmail(employee.getEmail())){
             throw new UserAlreadyExistException("Failed!! Email is already exists ");
         }
+
+        Department selectedDepartment = departmentService.getDepartmentByName(employee.getDepartment());
+        if(selectedDepartment == null){
+            throw new NotFoundException("Please enter a valid department name");
+        }
         GenerateEmpId generateEmpId = new GenerateEmpId();
         String empId =  generateEmpId.empIdGenerator(employee.getFirstName(), employee.getLastName());
         Employee newEmployee = new Employee();
@@ -55,6 +65,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         newEmployee.setSalary(employee.getSalary());
         newEmployee.setDob(employee.getDob());
         newEmployee.setEmail(employee.getEmail());
+        newEmployee.setDepartment(selectedDepartment);
         if("male".equalsIgnoreCase(employee.getGender())){
             newEmployee.setGender(Gender.MALE);
         }else{
@@ -69,9 +80,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getAllEmployeesOfCurrentUser(UserDetailsImp userDetails) {
         User user = userService.getUserByUsername(userDetails.getUsername());
 
-        List<Employee> employees = employeeRepository.getAllByUser(user);
-        return employees;
-
+        return employeeRepository.getAllByUser(user);
     }
 
     @Override
