@@ -25,4 +25,6 @@
     ** Axios
     ** Bootstrap
   
-![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/36235992/128586422-215e0e10-d383-493f-8a97-e5baf852ee49.gif)
+ ## DEMO:
+  
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/36235992/128586504-397d543e-06f4-4c4f-b23e-89a0aefdd88c.gif)
