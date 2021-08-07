@@ -26,3 +26,6 @@
     * Axios
     * Bootstrap
   
+## Demo:
+ 
+ ![2021-08-06 23-06-30_Trim](https://user-images.githubusercontent.com/36235992/128603509-f1c4f68a-da16-4a5d-8e9a-020c1f67ca2b.gif)
