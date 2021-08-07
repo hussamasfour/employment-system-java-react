@@ -10,20 +10,20 @@
  ## Build With: 
  
   * Backend:
-    ** Java
-    ** Spring boot
-    ** Spring Security
-    ** Hibernate
-    ** MySQL
-    ** JWT Token
+    *Java
+    * Spring boot
+    * Spring Security
+    * Hibernate
+    * MySQL
+    * JWT Token
   
   * Frontend:
-    ** React 
-    ** React-Router
-    ** Redux
-    ** Redux-Thunk
-    ** Axios
-    ** Bootstrap
+    * React 
+    * React-Router
+    * Redux
+    * Redux-Thunk
+    * Axios
+    * Bootstrap
   
  ## DEMO:
   
