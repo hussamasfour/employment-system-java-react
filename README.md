@@ -9,15 +9,15 @@
  
  ## Build With: 
  
-  * Backend:
-    *Java
+  ### Backend:
+    * Java
     * Spring boot
     * Spring Security
     * Hibernate
     * MySQL
     * JWT Token
   
-  * Frontend:
+  ### Frontend:
     * React 
     * React-Router
     * Redux
